@@ -1,5 +1,5 @@
 This program lets you chose a date; that simple.
-It uses (PySimpleGUI)[PySimpleGUI.org]. In this case I use `popup_get_date`. 
+It uses [PySimpleGUI](PySimpleGUI.org). In this case I use `popup_get_date`. 
 
 ### Build up program:
 - importing libraries 
