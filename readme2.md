@@ -1,9 +1,5 @@
-# CalendarButton and Popup_get_date in PySimpleGUI
-In this repository you find some basic programmes for chosing a date with [PySimpleGUI](https://www.pysimplegui.org/en/latest/).
-The very basic programme would be a layout like this:
-```Python
-layout = [[sg.T('Enter a date: '), sg.I()]]
-```
+This program lets you chose a date; that simple.
+It uses [PySimpleGUI](https://www.pysimplegui.org/en/latest/). In this case I use `popup_get_date`. 
 
 ### Build up program:
 - importing libraries 
