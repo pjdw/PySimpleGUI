@@ -9,8 +9,8 @@ MDY = (INITIAL_DATE.month, INITIAL_DATE.day, INITIAL_DATE.year,)  # Tuple of MDY
 sg.set_options(font=('Helvetica Neue', 14))
 
 layout = [[sg.T('Chose a date')],
-          [sg.I(INITIAL_DATE_STR, size=(10, 1), key='-DATE-'),
-           sg.CalendarButton("Calendar", target='-DATE-', default_date_m_d_y=MDY, format = DATE_FORMAT)],
+          [sg.I(INITIAL_DATE_STR, size=(10, 1), key='-DATE-', metadata='test'),
+           sg.CalendarButton("Calendar", target='-DATE-', default_date_m_d_y=MDY, format=DATE_FORMAT)],
           [sg.Ok(), sg.Exit()]]
 
 window = sg.Window('Date selector', layout)
@@ -28,10 +28,10 @@ def check_date(a):
 
 while True:
     event, values = window.read()
+    print(event, values)
+    # window=['-DATE-'].set_focus()
     if event in (sg.WIN_CLOSED, 'Exit'):
         break
-    # elif event == 'Calender':
-    #     cal_popup()
     elif event == 'Ok':
         if check_date(values['-DATE-']):  # If date is OK: update input; else loop again
             sg.popup(f"You have chosen {values['-DATE-']} as date", title='Conformation')

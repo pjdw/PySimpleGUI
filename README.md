@@ -1,9 +1,8 @@
 # CalendarButton and Popup_get_date in PySimpleGUI
-In this repository you find some basic programmes for chosing a date with [PySimpleGUI](https://www.pysimplegui.org/en/latest/).
-The very basic programme would be a layout like this:
-```Python
-layout = [[sg.T('Enter a date: '), sg.I()]]
-```
+In this repository you find some basic programmes for choosing a date with [PySimpleGUI](https://www.pysimplegui.org/en/latest/).  
+I started with `CalendarButton` button. After selecting a date with the button, I could not get focus on the edit window (see my post on [github](https://github.com/PySimpleGUI/PySimpleGUI/issues/6083)).
+The crazy thing was if cmd-Tab twice, focus is back. This is a bit inconvenient, so I tried `popug_get_date`. I used on extra function but focus is ok now.
+
 
 ### Build up program:
 - importing libraries 

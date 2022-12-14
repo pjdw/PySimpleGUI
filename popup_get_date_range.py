@@ -1,25 +1,26 @@
 import datetime as dt
 from datetime import date
+from dateutil.relativedelta import relativedelta
 import PySimpleGUI as sg
 
-# Declaring variables
+# Declare variables
 DATE_FORMAT = '%Y-%m-%d'
-INITIAL_DATE = dt.date(date.today().year, 1, 1)  # initial date object
-INITIAL_DATE_STR = INITIAL_DATE.strftime(DATE_FORMAT)  # initial date str
-YMD = (INITIAL_DATE.year, INITIAL_DATE.month, INITIAL_DATE.day)  # Tuple of YMD (for popup get date)
+PRIMO = dt.date(date.today().year, 1, 1)  # initial date object
+PRIMO_STR = PRIMO.strftime(DATE_FORMAT)  # initial date str
+ymd = (PRIMO.year, PRIMO.month, PRIMO.day)  # Tuple of ymd (for popup get date)
 
 sg.set_options(font=('Helvetica Neue', 14))
 
-layout = [[sg.T('Chose a date')],
-          [sg.Input(INITIAL_DATE_STR, size=(10, 1), key='-DATE-'), sg.Button('Calender')],
+layout = [[sg.T('Chosoe a date range')],
+          [sg.T(text='Start:', s=(6, 1)), sg.I(PRIMO, size=(10, 1), key='-DATE-'), sg.Button('Calender')],
           [sg.Ok(), sg.Exit()]]
 
-window = sg.Window('Date selector', layout)
+window = sg.Window('Date selector', layout, return_keyboard_events=True)
 
 
 def cal_popup():
     # initialize date popup with date choice as default. Store choice (tuple) to mdy
-    mdy = sg.popup_get_date(start_year=YMD[0], start_mon=YMD[1], start_day=YMD[2])
+    mdy = sg.popup_get_date(start_year=ymd[0], start_mon=ymd[1], start_day=ymd[2])
     if mdy:  # If a date is chosen in popup, update input
         popup_date = dt.date(mdy[2], mdy[0], mdy[1]).strftime(DATE_FORMAT)
         window['-DATE-'](popup_date)  # set input to popup
@@ -37,6 +38,7 @@ def check_date(a):
 
 while True:
     event, values = window.read()
+    print(event, values)
     if event in (sg.WIN_CLOSED, 'Exit'):
         break
     elif event == 'Calender':
