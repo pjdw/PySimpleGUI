@@ -6,13 +6,14 @@ import PySimpleGUI as sg
 # Declare variables
 DATE_FORMAT = '%Y-%m-%d'
 PRIMO = dt.date(date.today().year, 1, 1)  # initial date object
-PRIMO_STR = PRIMO.strftime(DATE_FORMAT)  # initial date str
-ymd = (PRIMO.year, PRIMO.month, PRIMO.day)  # Tuple of ymd (for popup get date)
+YMD = (PRIMO.year, PRIMO.month, PRIMO.day)  # Tuple of YMD (for popup get date)
+YESTERDAY = dt.date.today() - relativedelta(days=1)
 
 sg.set_options(font=('Helvetica Neue', 14))
 
 layout = [[sg.T('Chosoe a date range')],
-          [sg.T(text='Start:', s=(6, 1)), sg.I(PRIMO, size=(10, 1), key='-DATE-'), sg.Button('Calender')],
+          [sg.T(text='Start:', s=(6, 1)), sg.I(PRIMO, size=(10, 1), key='-START-'), sg.Button('CalStart')],
+          [sg.T(text='End:', s=(6, 1)), sg.I(YESTERDAY, size=(10, 1), key='-END-'), sg.Button('CalEnd')],
           [sg.Ok(), sg.Exit()]]
 
 window = sg.Window('Date selector', layout, return_keyboard_events=True)
@@ -20,10 +21,10 @@ window = sg.Window('Date selector', layout, return_keyboard_events=True)
 
 def cal_popup():
     # initialize date popup with date choice as default. Store choice (tuple) to mdy
-    mdy = sg.popup_get_date(start_year=ymd[0], start_mon=ymd[1], start_day=ymd[2])
+    mdy = sg.popup_get_date(start_year=YMD[0], start_mon=YMD[1], start_day=YMD[2])
     if mdy:  # If a date is chosen in popup, update input
         popup_date = dt.date(mdy[2], mdy[0], mdy[1]).strftime(DATE_FORMAT)
-        window['-DATE-'](popup_date)  # set input to popup
+        window['-START-'](popup_date)  # set input to popup
 
 
 def check_date(a):
@@ -44,8 +45,8 @@ while True:
     elif event == 'Calender':
         cal_popup()
     elif event == 'Ok':
-        if check_date(values['-DATE-']):  # If date is OK: update input; else loop again
-            sg.popup(f"You have chosen {values['-DATE-']} as date", title='Conformation')
+        if check_date(values['-START-']):  # If date is OK: update input; else loop again
+            sg.popup(f"You have chosen {values['-START-']} as date", title='Conformation')
             break
         else:
             continue
