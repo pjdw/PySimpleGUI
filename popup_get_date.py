@@ -4,7 +4,6 @@ import PySimpleGUI as sg
 
 init_date = dt.date(date.today().year, 1, 1)                                       # initial date for input field
 DATE_FORMAT = '%Y-%m-%d'                                                           # Date format for conversion etc
-
 sg.set_options(font=('Helvetica Neue', 14))
 
 # layout with text, input field, calendar button and OK/Exit
